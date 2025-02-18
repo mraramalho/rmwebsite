@@ -35,7 +35,3 @@ func (m *Repository) AboutHandler(w http.ResponseWriter, r *http.Request) {
 		StringMap: stringMap,
 	})
 }
-
-func (m *Repository) ContactHandler(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "contact.page.tmpl", &models.TemplateData{})
-}

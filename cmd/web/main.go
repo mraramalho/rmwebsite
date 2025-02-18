@@ -9,7 +9,7 @@ import (
 	"github.com/mrramalho/rmwebsite/pkg/render"
 )
 
-const webPort = "8087"
+const webPort = ":8087" // Add the colon before the port number
 
 func main() {
 	var app config.AppConfig
@@ -28,12 +28,13 @@ func main() {
 
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", handlers.Repo.HomeHandler)
-	http.HandleFunc("/about", handlers.Repo.AboutHandler)
-	http.HandleFunc("/contact", handlers.Repo.ContactHandler)
-
 	log.Println("Starting server on port", webPort)
-	err = http.ListenAndServe(":8087", nil)
+	srv := &http.Server{
+		Addr:    webPort,
+		Handler: Routes(&app),
+	}
+
+	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}
