@@ -14,14 +14,17 @@ import (
 
 var app *config.AppConfig
 
+// NewTemplates sets the config for the template package
 func NewTemplates(a *config.AppConfig) {
 	app = a
 }
 
+// RenderTemplate renders templates using html/template
 func AddDefaultData(td *models.TemplateData) *models.TemplateData {
 	return td
 }
 
+// RenderTemplate renders templates using html/template
 func RenderTemplate(w http.ResponseWriter, tmplName string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
@@ -53,6 +56,7 @@ func RenderTemplate(w http.ResponseWriter, tmplName string, td *models.TemplateD
 	}
 }
 
+// CreateTemplates creates a template cache as a map
 func CreateTemplates() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
